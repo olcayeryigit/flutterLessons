@@ -1,4 +1,4 @@
-//Ders 7.3- 18.03
+//Ders 7.3- dk:15
 import 'package:flutter/material.dart';
 
 void main() {

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: sayilar.length,
+              itemCount: sayilar.length, //builder i çalıştırma sayısı
               itemBuilder: (BuildContext context, int index) {
                 return Text(sayilar[index].toString());
               },
@@ -33,21 +33,21 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
 
-  //Dizi elemanlarını toplayan, toplamı döndüren fonksiyon
-  int toplam(List<int> sayilar) {
-    return sayilar.fold(
-      0,
-      (sum, sayi) => sum + sayi,
-    ); //reduce de kullanılabilir, fold 0 seçeneği sunar
-  }
+//Dizi elemanlarını toplayan, toplamı döndüren fonksiyon
+int toplam(List<int> sayilar) {
+  return sayilar.fold(
+    0,
+    (sum, sayi) => sum + sayi,
+  ); //reduce de kullanılabilir, fold 0 seçeneği sunar
+}
 
-  //Alert fonksiyonu
-  void toplamGoster(BuildContext context, int sonuc) {
-    var alert = AlertDialog(
-      title: Text("Toplam"),
-      content: Text(sonuc.toString()),
-    );
-    showDialog(context: context, builder: (BuildContext content) => alert);
-  }
+//Alert fonksiyonu
+void toplamGoster(BuildContext context, int sonuc) {
+  var alert = AlertDialog(
+    title: Text("Toplam"),
+    content: Text(sonuc.toString()),
+  );
+  showDialog(context: context, builder: (BuildContext content) => alert);
 }
