@@ -1,6 +1,8 @@
+// main.dart
+
 import 'package:flutter/material.dart';
-import 'package:my_app/models/student.dart';
-import 'package:my_app/screens/student_add.dart';
+import 'models/student.dart';
+import 'screens/25-student_add.dart';
 
 void main() {
   runApp(MaterialApp(home: MyApp()));
@@ -12,10 +14,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Student selectedStudent = new Student.withId(0, "", "", 0);
+  Student selectedStudent = Student.withId(0, "", "", 0);
 
   List<Student> students = [
-    new Student.withId(1, "Olcay", "Eryiğit", 50),
+    Student.withId(1, "Olcay", "Eryiğit", 50),
     Student.withId(2, "Onur", "Eryiğit", 40),
     Student.withId(3, "Sati", "Eryiğit", 20),
   ];
@@ -51,8 +53,6 @@ class _MyAppState extends State<MyApp> {
                   ),
                   trailing: buildStatusIcon(students[index].grade),
                   onTap: () {
-                    print(students[index].grade.toString());
-
                     setState(() {
                       selectedStudent = students[index];
                     });
@@ -61,12 +61,10 @@ class _MyAppState extends State<MyApp> {
               },
             ),
           ),
-
           Text(
             "Seçili Öğrenci: " + selectedStudent.firstName,
             style: TextStyle(color: Colors.black),
           ),
-
           Row(
             children: <Widget>[
               Flexible(
@@ -76,18 +74,27 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => StudentAdd()),
-                    );
+                      MaterialPageRoute(
+                        builder: (context) => StudentAdd(students),
+                      ),
+                    ).then((updatedList) {
+                      if (updatedList != null && updatedList is List<Student>) {
+                        setState(() {
+                          students =
+                              updatedList; // Öğrenci listesine yeni öğe eklenmiş oldu
+                        });
+                      }
+                    });
                   },
+
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 45),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero, // Köşeleri sıfır yapar
+                      borderRadius: BorderRadius.zero,
                     ),
                     backgroundColor: Colors.greenAccent,
                     iconColor: Colors.black,
                   ),
-
                   child: Row(
                     children: [
                       Icon(Icons.add),
@@ -103,12 +110,10 @@ class _MyAppState extends State<MyApp> {
               Flexible(
                 fit: FlexFit.tight,
                 flex: 2,
-
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 45),
-
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.zero,
                     ),
@@ -134,7 +139,6 @@ class _MyAppState extends State<MyApp> {
                     });
                     var message =
                         selectedStudent.firstName + " isimli öğrenci silindi";
-
                     mesajGoster(context, message);
                   },
                   style: ElevatedButton.styleFrom(

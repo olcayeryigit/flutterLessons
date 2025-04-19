@@ -1,10 +1,6 @@
-//NAVİGASYON
-//ÖĞRENCİ EKLEME İŞLEMİ
-//Öğrenci ekle butonuna bastığımda beni öğrenci ekle sayfasına götürsün
-//lib klasörü içerisine screens diye bir klasör ekleyelim
 import 'package:flutter/material.dart';
 import 'package:my_app/models/student.dart';
-import 'package:my_app/screens/23-student_add.dart';
+import 'package:my_app/screens/24-student_add.dart';
 
 void main() {
   runApp(MaterialApp(home: MyApp()));
@@ -73,13 +69,11 @@ class _MyAppState extends State<MyApp> {
 
           Row(
             children: <Widget>[
-              //Öğrenci ekleme butonuna basıldığında navigator ile öğrenci ekleme screen ine gidelim
               Flexible(
                 fit: FlexFit.tight,
                 flex: 2,
                 child: ElevatedButton(
                   onPressed: () {
-                    //YENİ ÖĞRENCİ EKLEME SAYFASINA GÖTÜRME
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => StudentAdd()),
